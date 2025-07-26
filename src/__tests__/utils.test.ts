@@ -16,11 +16,20 @@ describe("cidrToIpPrefix", () => {
   it("should convert CIDR to IP and prefix", () => {
     expect(cidrToIpPrefix("192.168.1.1/24")).toEqual(["192.168.1.1", 24]);
   });
+  it("should return null when CIDR is invalid", () => {
+    expect(cidrToIpPrefix("999.999.9.9/99")).toEqual(null);
+  });
 });
 
 describe("ipPrefixToCidr", () => {
   it("should convert IP and prefix to CIDR", () => {
     expect(ipPrefixToCidr("192.168.1.1", 24)).toBe("192.168.1.1/24");
+  });
+  it("should return empty string for invalid IP", () => {
+    expect(ipPrefixToCidr("999.999.999.999", 24)).toBe("");
+  });
+  it("should return empty string for invalid prefix", () => {
+    expect(ipPrefixToCidr("192.168.1.1", 99)).toBe("");
   });
 });
 
